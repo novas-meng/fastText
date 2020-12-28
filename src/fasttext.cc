@@ -661,6 +661,7 @@ void FastText::trainThread(int32_t threadId, const TrainCallback& callback) {
         localTokenCount += dict_->getLine(ifs, line, state.rng);
         skipgram(state, lr, line);
       }
+      std::cout << "localTokenCount" << std::endl;
       if (localTokenCount > args_->lrUpdateRate) {
         tokenCount_ += localTokenCount;
         localTokenCount = 0;
@@ -741,6 +742,7 @@ std::shared_ptr<Matrix> FastText::createTrainOutputMatrix() const {
 }
 
 void FastText::train(const Args& args, const TrainCallback& callback) {
+  std::cout << "train" << std::endl;
   args_ = std::make_shared<Args>(args);
   dict_ = std::make_shared<Dictionary>(args_);
   if (args_->input == "-") {

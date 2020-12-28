@@ -6,6 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+//这个命令保证头文件只被编译一次
 #pragma once
 
 #include <istream>
@@ -16,6 +17,7 @@
 
 namespace fasttext {
 
+//枚举，使用的时候这么用 Enumeration2::val2
 enum class model_name : int { cbow = 1, sg, sup };
 enum class loss_name : int { hs = 1, ns, softmax, ova };
 enum class metric_name : int {

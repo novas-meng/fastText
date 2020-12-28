@@ -33,7 +33,9 @@ struct entry {
 
 class Dictionary {
  protected:
+  //这个表示词典最大的个数 3百w
   static const int32_t MAX_VOCAB_SIZE = 30000000;
+  //这个表示 一行最大1024个单词
   static const int32_t MAX_LINE_SIZE = 1024;
 
   int32_t find(const std::string&) const;
@@ -42,20 +44,26 @@ class Dictionary {
   void initNgrams();
   void reset(std::istream&) const;
   void pushHash(std::vector<int32_t>&, int32_t) const;
+  //添加subword信息
   void addSubwords(std::vector<int32_t>&, const std::string&, int32_t) const;
 
   std::shared_ptr<Args> args_;
+  //存放词语对应的位置信息
   std::vector<int32_t> word2int_;
+  //存放具体词语entry信息
   std::vector<entry> words_;
 
   std::vector<real> pdiscard_;
+  //size_这个函数表示words_这个vector的大小
   int32_t size_;
   int32_t nwords_;
   int32_t nlabels_;
   int64_t ntokens_;
 
   int64_t pruneidx_size_;
+  //map 内部结构为红黑树 unordered_map 内部为哈希表
   std::unordered_map<int32_t, int32_t> pruneidx_;
+  //添加ngram信息
   void addWordNgrams(
       std::vector<int32_t>& line,
       const std::vector<int32_t>& hashes,
